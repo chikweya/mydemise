@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nice Try, Lucksunyaa!</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            /* LAVENDER BACKGROUND */
+            background-color: #f3e5f5; 
+            font-family: 'Quicksand', 'Segoe UI', sans-serif;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 60px;
+            border-radius: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            width: 550px;
+            min-height: 480px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            /* SOFT PEACH BORDER */
+            border: 8px solid #ffe0b2; 
+        }
+
+        h1 {
+            /* DEEP VIOLET TEXT */
+            color: #4a148c; 
+            font-size: 32px;
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+
+        .bounce-text {
+            animation: bounce 0.6s infinite alternate;
+            /* VIBRANT CORAL */
+            color: #ff7043; 
+            font-weight: 800;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-12px); }
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            height: 150px;
+        }
+
+        button {
+            padding: 18px 40px;
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.3s ease;
+        }
+
+        #yesBtn {
+            /* PEACH BUTTON */
+            background-color: #ffab91; 
+            color: white;
+            z-index: 1000;
+        }
+
+        #noBtn {
+            /* LIGHT LILAC BUTTON */
+            background-color: #e1bee7; 
+            color: #6a1b9a;
+            z-index: 10;
+        }
+
+        .caption {
+            margin-top: 40px;
+            color: #7b1fa2;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .gif-container img {
+            width: 300px;
+            border-radius: 25px;
+            margin-top: 20px;
+            border: 5px solid #f3e5f5;
+        }
+
+        /* GLOW COLOR */
+        .glow {
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 10px #ffccbc; }
+            50% { box-shadow: 0 0 30px #ffab91; }
+            100% { box-shadow: 0 0 10px #ffccbc; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="mainCard">
+        <h1 id="questionText">Lucksunyaa do you wish for my demise?</h1>
+        
+        <div class="buttons" id="buttonArea">
+            <button id="yesBtn" onmouseover="flee()">Yes</button>
+            <button id="noBtn" onclick="stayForever()">No</button>
+        </div>
+
+        <p class="caption" id="bottomCaption">Wait, the "Yes" seems a bit shy! 🏃‍♂️💨</p>
+    </div>
+
+    <script>
+        let noScale = 1;
+        let isFirstMove = true;
+
+        function flee() {
+            const yesBtn = document.getElementById('yesBtn');
+            if (isFirstMove) {
+                yesBtn.style.position = 'fixed';
+                isFirstMove = false;
+            }
+            const x = Math.random() * (window.innerWidth - yesBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - yesBtn.offsetHeight);
+            yesBtn.style.left = x + 'px';
+            yesBtn.style.top = y + 'px';
+            growNo();
+        }
+
+        function growNo() {
+            const noBtn = document.getElementById('noBtn');
+            noScale += 0.4;
+            noBtn.style.transform = `scale(${noScale})`;
+            if (noScale > 1.4) {
+                noBtn.classList.add('glow');
+                /* Glow color change to Peach */
+                noBtn.style.backgroundColor = '#ffccbc'; 
+            }
+        }
+
+        function stayForever() {
+            const card = document.getElementById('mainCard');
+            const yesBtn = document.getElementById('yesBtn');
+            if(yesBtn) yesBtn.remove();
+
+            card.innerHTML = `
+                <span class="bounce-text" style="font-size: 40px;">Aha! I knew it! 😜</span>
+                <h1 style="font-size: 24px;">I'm here to stay, whomp whomp... <br>☹️</h1>
+                <div class="gif-container">
+                    <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3d25sYjg3Y3QyajVqNzlucG5nZDRoc2Jxc2E5Mjc2YmNhMWUxNWRjeSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/VdWlu8WOuvgf8P1l7M/giphy.gif" alt="I'm staying!">
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
